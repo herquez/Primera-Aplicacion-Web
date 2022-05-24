@@ -1,0 +1,34 @@
+﻿@using Primera_Aplicacion_Web.Models
+@model List<MarcaCLS>
+@* model List<MarcaCLS> contiene los elemntos de la tabla Marca *@
+
+@{
+    ViewBag.Title = "Marcas";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Agregar Maraca", "AgregarMarca", "Marca", null, new { @class="btn btn-primary"})
+
+<br /><br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td width="10%">@Html.LabelFor(p => Model[0].iidmarca)</td>
+            <td width="20%">@Html.LabelFor(p => Model[0].nombre)</td>
+            <td width="70%">@Html.LabelFor(p => Model[0].descripcion)</td>
+        </tr>
+    </thead>
+    <tbody>
+        @* El foreach recorre las columnas de model List<MarcaCLS> *@
+        @foreach(var m in Model)
+         {
+             <tr>
+                 <td>@m.iidmarca</td>
+                 <td>@m.nombre</td>
+                 <td>@m.descripcion</td>
+             </tr>
+         }
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@using Primera_Aplicacion_Web.Models
+@model List<ClienteCLS>
+
+@{
+    ViewBag.Title = "Clientes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Agregar Cliente", "AgregarCliente", "Cliente", null, new {@class="btn btn-primary"})
+<br /><br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td width="10%">@Html.LabelFor(p => Model[0].iidcliente)</td>
+            <td width="50%">@Html.LabelFor(p => Model[0].nombre)</td>
+            <td width="40%">@Html.LabelFor(p => Model[0].telefonofijo)</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model) {
+            <tr>
+                <td>@m.iidcliente</td>
+                <td>@m.nombre @m.appaterno @m.apmaterno</td>
+                <td>@m.telefonofijo</td>
+            </tr>
+        }
+    </tbody>
+</table>
