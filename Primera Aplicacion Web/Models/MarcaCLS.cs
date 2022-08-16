@@ -22,10 +22,14 @@ namespace Primera_Aplicacion_Web.Models {
         public string nombre { get; set; }
 
         [Required]
-        [Display(Name = "Descripcion Marca")]
+        [Display(Name = "Descripción Marca")]
+        [DataType(DataType.MultilineText)]
         [StringLength(200, ErrorMessage = "La longitud máxima son 200 caracteres.")]
         public string descripcion { get; set; }
 
         public int bhabilitado { get; set; }
+
+        //Aditional propeties
+        public string errorMessage { get; set; }
     }
 }

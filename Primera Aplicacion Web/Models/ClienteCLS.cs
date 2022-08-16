@@ -33,6 +33,7 @@ namespace Primera_Aplicacion_Web.Models {
 
         [Required]
         [Display(Name = "Dirección Cliente")]
+        [DataType(DataType.MultilineText)]
         [StringLength(200, ErrorMessage = "La longitud máxima son 200 caracteres.")]
         public string direccion { get; set; }
 
@@ -55,5 +56,8 @@ namespace Primera_Aplicacion_Web.Models {
         public string telefonocelular { get; set; }
 
         public int bhabilitado { get; set; }
+
+        //Aditional propeties
+        public string errorMessage { get; set; }
     }
 }

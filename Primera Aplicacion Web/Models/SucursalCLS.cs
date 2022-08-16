@@ -23,6 +23,7 @@ namespace Primera_Aplicacion_Web.Models {
 
         [Required]
         [Display(Name = "Dirección Sucursal")]
+        [DataType(DataType.MultilineText)]
         [StringLength(200, ErrorMessage = "La longitud máxima son 200 caracteres.")]
         public string direccion { get; set; }
 
@@ -36,9 +37,12 @@ namespace Primera_Aplicacion_Web.Models {
         [Required]
         [Display(Name = "Fecha de apertura")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime fechaapertura { get; set; }
 
         public int bhabilitado { get; set; }
+
+        //Aditional propeties
+        public string errorMessage { get; set; }
     }
 }

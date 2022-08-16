@@ -1,5 +1,4 @@
-﻿@using Primera_Aplicacion_Web.Models
-@model SucursalCLS
+﻿@model Primera_Aplicacion_Web.Models.SucursalCLS
 
 @{
     ViewBag.Title = "Agregar Sucursal";
@@ -9,25 +8,28 @@
 
 <div class="row">
     <div class="col-md-6">
-        @using(Html.BeginForm("AgregarSucursal", "Sucursal", FormMethod.Post)) {
+        @using(Html.BeginForm("AgregarSucursal", "Sucursal", FormMethod.Post, new { @id = "addForm" })) {
             <div>
                 @Html.LabelFor(p => p.nombre)
                 @Html.TextBoxFor(p => p.nombre, new { @class = "form-control" })
                 @Html.ValidationMessage("nombre", new { @class = "text-danger" })
+                @if(Model != null && Model.errorMessage != null) {
+                    <div class="text-danger">@Model.errorMessage</div>
+                }
             </div>
             <div>
                 @Html.LabelFor(p => p.direccion)
-                @Html.TextBoxFor(p => p.direccion, new { @class = "form-control" })
+                @Html.EditorFor(p => p.direccion, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessage("direccion", new { @class = "text-danger" })
             </div>
             <div>
                 @Html.LabelFor(p => p.telefono)
-                @Html.TextBoxFor(p => p.telefono, new { @class = "form-control" })
+                @Html.EditorFor(p => p.telefono, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessage("telefono", new { @class = "text-danger" })
             </div>
             <div>
                 @Html.LabelFor(p => p.email)
-                @Html.TextBoxFor(p => p.email, new { @class = "form-control" })
+                @Html.EditorFor(p => p.email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessage("email", new { @class = "text-danger" })
             </div>
             <div>
@@ -38,8 +40,37 @@
             <br />
             //El type="submit" envía la pagina al controlador
             <div style="margin:auto">
-                <input type="submit" class="btn btn-primary" value="Guardar" />
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
+                    Guardar
+                </button>
+                @Html.ActionLink("Regresar", "Index", "Sucursal", null, new { @class = "btn btn-danger" })
             </div>
-         }
+        }
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+                Se va a agregar un elemento nuevo, ¿Desea continuar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="saveChanges()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var addForm = document.getElementById("addForm");
+    function saveChanges() {
+        addForm.submit();
+    }
+</script>

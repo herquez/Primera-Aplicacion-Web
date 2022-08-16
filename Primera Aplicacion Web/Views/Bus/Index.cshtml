@@ -1,0 +1,74 @@
+﻿@model List<Primera_Aplicacion_Web.Models.BusCLS>
+
+@{
+    ViewBag.Title = "Bus";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Agregar Bus", "AgregarBus", "Bus", null, new { @class = "btn btn-primary" })
+<br />
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td>@Html.LabelFor(p => Model[0].iidbus)</td>
+            <td>@Html.LabelFor(p => Model[0].placa)</td>
+            <td>@Html.LabelFor(p => Model[0].nombresucursal)</td>
+            <td>@Html.LabelFor(p => Model[0].nombretipobus)</td>
+            <td>@Html.LabelFor(p => Model[0].nombremodelo)</td>
+            <td>@Html.LabelFor(p => Model[0].nombremarca)</td>
+            <td><label>Operaciones</label></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model) {
+            <tr>
+                <td>@m.iidbus</td>
+                <td>@m.placa</td>
+                <td>@m.nombresucursal</td>
+                <td>@m.nombretipobus</td>
+                <td>@m.nombremodelo</td>
+                <td>@m.nombremarca </td>
+                <td>
+                    @Html.ActionLink(" ", "EditarBus", "Bus", new { id = @m.iidbus }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                    <button type="button" class="glyphicon glyphicon-trash btn btn-danger" data-toggle="modal" 
+                            data-target="#confirmationModal" onclick="itemToDelete(@m.iidbus)"> </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@using(Html.BeginForm("borrarBus", "Bus", FormMethod.Post, new { @id = "deleteForm" })) {
+    @Html.Hidden("idBus")
+}
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminar @ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+                Se va a modifcar el elemento, ¿Desea guardar los cambios?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="borrar()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function itemToDelete(idBus) {
+        document.getElementById("idBus").value = idBus;
+    }
+
+    function borrar() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>

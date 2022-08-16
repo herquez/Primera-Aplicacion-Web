@@ -1,0 +1,85 @@
+﻿@model Primera_Aplicacion_Web.Models.ViajeCLS
+
+@{
+    ViewBag.Title = "Editar Viaje";
+    List<SelectListItem> listaLugarOrigen = (List<SelectListItem>)ViewBag.listaLugarOrigen;
+    List<SelectListItem> listaLugarDestino = (List<SelectListItem>)ViewBag.listaLugarDestino;
+    List<SelectListItem> listaBus = (List<SelectListItem>)ViewBag.listaBus;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using(Html.BeginForm("EditarViaje", "Viaje", FormMethod.Post, new { @id = "editForm" })) {
+            <div>
+                @Html.LabelFor(m => m.iidviaje)
+                @Html.TextBoxFor(m => m.iidviaje, new { @class = "form-control", @readOnly = true })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.iidlugarorigen)
+                @Html.DropDownList("iidlugarorigen", listaLugarOrigen, "Seleccione Lugar de Origen...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.iidlugarorigen, null, new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.iidlugardestino)
+                @Html.DropDownList("iidlugardestino", listaLugarDestino, "Seleccione Lugar de Destino...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.iidlugardestino, null, new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.precio)
+                @Html.TextBoxFor(m => m.precio, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.precio, null, new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.fechaviaje)
+                @Html.EditorFor(m => m.fechaviaje, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.fechaviaje, null, new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.iidbus)
+                @Html.DropDownList("iidbus", listaBus, "Seleccione Bus...", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.iidbus, null, new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(m => m.numeroasientosdisponibles)
+                @Html.TextBoxFor(m => m.numeroasientosdisponibles, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.numeroasientosdisponibles, null, new { @class = "text-danger" })
+            </div>
+            <br />
+            //El type="submit" envía la pagina al controlador
+            <div style="margin:auto">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
+                    Guardar
+                </button>
+                @Html.ActionLink("Regresar", "Index", "Viaje", null, new { @class = "btn btn-danger" })
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+                Se va a modifcar el elemento, ¿Desea guardar los cambios?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="saveChanges()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    editForm = document.getElementById("editForm");
+    function saveChanges() {
+        editForm.submit();
+    }
+</script>

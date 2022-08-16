@@ -1,6 +1,4 @@
-﻿@using Primera_Aplicacion_Web.Models
-@model List<MarcaCLS>
-@* model List<MarcaCLS> contiene los elemntos de la tabla Marca *@
+﻿@model List<Primera_Aplicacion_Web.Models.MarcaCLS>
 
 @{
     ViewBag.Title = "Marcas";
@@ -9,26 +7,64 @@
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Agregar Maraca", "AgregarMarca", "Marca", null, new { @class="btn btn-primary"})
+@Html.ActionLink("Agregar Marca", "AgregarMarca", "Marca", null, new { @class = "btn btn-primary" })
 
-<br /><br />
+<br />
+<br />
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <td width="10%">@Html.LabelFor(p => Model[0].iidmarca)</td>
             <td width="20%">@Html.LabelFor(p => Model[0].nombre)</td>
-            <td width="70%">@Html.LabelFor(p => Model[0].descripcion)</td>
+            <td width="60%">@Html.LabelFor(p => Model[0].descripcion)</td>
+            <td width="10%"><label>Operaciones</label></td>
         </tr>
     </thead>
     <tbody>
         @* El foreach recorre las columnas de model List<MarcaCLS> *@
-        @foreach(var m in Model)
-         {
-             <tr>
-                 <td>@m.iidmarca</td>
-                 <td>@m.nombre</td>
-                 <td>@m.descripcion</td>
-             </tr>
-         }
+        @foreach(var m in Model) {
+            <tr>
+                <td>@m.iidmarca</td>
+                <td>@m.nombre</td>
+                <td>@m.descripcion</td>
+                <td>
+                    @Html.ActionLink(" ", "EditarMarca", "Marca", new { id = @m.iidmarca }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                    <button type="button" class="glyphicon glyphicon-trash btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="itemToDelete(@m.iidmarca)">  </button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@using(Html.BeginForm("BorrarMarca", "Marca", FormMethod.Post, new { @id = "deleteForm" })) {
+    @Html.Hidden("idMarca")
+}
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminar Marca</h4>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que desea eliminar la marca?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="borrar()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function itemToDelete(idMarca) {
+        document.getElementById("idMarca").value = idMarca;
+    }
+
+    function borrar() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>

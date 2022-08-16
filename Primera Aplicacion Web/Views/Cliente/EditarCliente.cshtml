@@ -1,0 +1,99 @@
+﻿@model Primera_Aplicacion_Web.Models.ClienteCLS
+
+@{
+    ViewBag.Title = "Editar Cliente";
+    List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.listaSexo;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using(Html.BeginForm("EditarCliente", "Cliente", FormMethod.Post, new { @id = "editForm" })) {
+            <div>
+                @Html.LabelFor(p => p.iidcliente)
+                @Html.TextBoxFor(p => p.iidcliente, new { @class = "form-control", @readOnly = true })
+                @Html.ValidationMessage("iidcliente", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.nombre)
+                @Html.TextBoxFor(p => p.nombre, new { @class = "form-control" })
+                @Html.ValidationMessage("nombre", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.appaterno)
+                @Html.TextBoxFor(p => p.appaterno, new { @class = "form-control" })
+                @Html.ValidationMessage("appaterno", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.apmaterno)
+                @Html.TextBoxFor(p => p.apmaterno, new { @class = "form-control" })
+                @Html.ValidationMessage("apmaterno", new { @class = "text-danger" })
+            </div>
+            <div>
+                @if(Model != null && Model.errorMessage != null) {
+                    <div class="text text-danger">@Model.errorMessage</div>
+                }
+            </div>
+            <div>
+                @Html.LabelFor(p => p.email)
+                @Html.EditorFor(p => p.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("email", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.direccion)
+                @Html.EditorFor(p => p.direccion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("direccion", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.iidsexo)
+                @Html.DropDownList("iidsexo", listaSexo, null, new { @class = "form-control" })
+                @Html.ValidationMessage("iidsexo", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.telefonofijo)
+                @Html.EditorFor(p => p.telefonofijo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("telefonofijo", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.telefonocelular)
+                @Html.EditorFor(p => p.telefonocelular, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("telefonocelular", new { @class = "text-danger" })
+            </div>
+            <br />
+            //El type="submit" envía la pagina al controlador
+            <div style="margin:auto">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
+                    Guardar
+                </button>
+                @Html.ActionLink("Regresar", "Index", "Cliente", null, new { @class = "btn btn-danger" })
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+                Se va a modifcar el elemento, ¿Desea guardar los cambios?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="saveChanges()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    editForm = document.getElementById("editForm");
+    function saveChanges() {
+        editForm.submit();
+    }
+</script>

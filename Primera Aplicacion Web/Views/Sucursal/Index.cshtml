@@ -1,21 +1,22 @@
-﻿@using Primera_Aplicacion_Web.Models
-@model List<SucursalCLS>
+﻿@model List<Primera_Aplicacion_Web.Models.SucursalCLS>
 @{
     ViewBag.Title = "Sucursales";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Agregar Sucursal", "AgregarSucursal", "Sucursal", null, new {@class="btn btn-primary"})
+@Html.ActionLink("Agregar Sucursal", "AgregarSucursal", "Sucursal", null, new { @class = "btn btn-primary" })
 
-<br /><br />
+<br />
+<br />
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <td width="10%">@Html.LabelFor(p => Model[0].iidsucursal)</td>
             <td width="20%">@Html.LabelFor(p => Model[0].nombre)</td>
-            <td width="35%">@Html.LabelFor(p => Model[0].telefono)</td>
+            <td width="25%">@Html.LabelFor(p => Model[0].telefono)</td>
             <td width="35%">@Html.LabelFor(p => Model[0].email)</td>
+            <td width="10%"><label>Operaciones</label></td>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +26,44 @@
                 <td>@m.nombre</td>
                 <td>@m.telefono</td>
                 <td>@m.email</td>
+                <td>
+                    @Html.ActionLink(" ", "EditarSucursal", "Sucursal", new { id = m.iidsucursal }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                    <button type="button" class="glyphicon glyphicon-trash btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="itemToDelete(@m.iidsucursal)"> </button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+@using(Html.BeginForm("BorrarSucursal", "Sucursal", FormMethod.Post, new { @id = "deleteForm" })) {
+    @Html.Hidden("idSucursal")
+}
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Eliminar Sucursal</h4>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que desea eliminar la sucursal?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="borrar()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function itemToDelete(idSucursal) {
+        document.getElementById("idSucursal").value = idSucursal;
+    }
+
+    function borrar() {
+        document.getElementById("deleteForm").submit();
+    }
+</script>
