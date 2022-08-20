@@ -11,19 +11,37 @@ namespace Primera_Aplicacion_Web.Controllers
     public class ClienteController : Controller
     {
         // GET: Cliente
-        public ActionResult Index()
+        public ActionResult Index(ClienteCLS clienteCLS)
         {
             List<ClienteCLS> listaCliente = new List<ClienteCLS>();
             using(var db = new BDPasajeEntities()) {
-                listaCliente = (from cliente in db.Cliente
-                               where cliente.BHABILITADO == 1
-                               select new ClienteCLS {
-                                   iidcliente = cliente.IIDCLIENTE,
-                                   nombre = cliente.NOMBRE,
-                                   appaterno = cliente.APPATERNO,
-                                   apmaterno = cliente.APMATERNO,
-                                   telefonofijo = cliente.TELEFONOFIJO,
-                               }).ToList();
+                if(clienteCLS.fullName == null) {
+                    listaCliente = (from cliente in db.Cliente
+                                    where cliente.BHABILITADO == 1
+                                    select new ClienteCLS {
+                                        iidcliente = cliente.IIDCLIENTE,
+                                        nombre = cliente.NOMBRE,
+                                        appaterno = cliente.APPATERNO,
+                                        apmaterno = cliente.APMATERNO,
+                                        telefonofijo = cliente.TELEFONOFIJO,
+                                    }).ToList();
+                } else {
+                    listaCliente = (from cliente in db.Cliente
+                                    where cliente.BHABILITADO == 1 &&
+                                    (clienteCLS.fullName.Contains(cliente.NOMBRE) ||
+                                     clienteCLS.fullName.Contains(cliente.APPATERNO) ||
+                                     clienteCLS.fullName.Contains(cliente.APMATERNO) ||
+                                     cliente.NOMBRE.Contains(clienteCLS.fullName) ||
+                                     cliente.APPATERNO.Contains(clienteCLS.fullName) ||
+                                     cliente.APMATERNO.Contains(clienteCLS.fullName))
+                                    select new ClienteCLS {
+                                        iidcliente = cliente.IIDCLIENTE,
+                                        nombre = cliente.NOMBRE,
+                                        appaterno = cliente.APPATERNO,
+                                        apmaterno = cliente.APMATERNO,
+                                        telefonofijo = cliente.TELEFONOFIJO,
+                                    }).ToList();
+                }
             }
             return View(listaCliente);
         }
