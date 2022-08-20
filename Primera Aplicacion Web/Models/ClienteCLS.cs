@@ -60,6 +60,6 @@ namespace Primera_Aplicacion_Web.Models {
         //Aditional propeties
         public string errorMessage { get; set; }
 
-        public string fullName { get; set; }
+        public string searchName { get; set; }
     }
 }

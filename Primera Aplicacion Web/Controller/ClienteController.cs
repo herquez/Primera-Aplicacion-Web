@@ -15,7 +15,7 @@ namespace Primera_Aplicacion_Web.Controllers
         {
             List<ClienteCLS> listaCliente = new List<ClienteCLS>();
             using(var db = new BDPasajeEntities()) {
-                if(clienteCLS.fullName == null) {
+                if(clienteCLS.searchName == null) {
                     listaCliente = (from cliente in db.Cliente
                                     where cliente.BHABILITADO == 1
                                     select new ClienteCLS {
@@ -28,12 +28,12 @@ namespace Primera_Aplicacion_Web.Controllers
                 } else {
                     listaCliente = (from cliente in db.Cliente
                                     where cliente.BHABILITADO == 1 &&
-                                    (clienteCLS.fullName.Contains(cliente.NOMBRE) ||
-                                     clienteCLS.fullName.Contains(cliente.APPATERNO) ||
-                                     clienteCLS.fullName.Contains(cliente.APMATERNO) ||
-                                     cliente.NOMBRE.Contains(clienteCLS.fullName) ||
-                                     cliente.APPATERNO.Contains(clienteCLS.fullName) ||
-                                     cliente.APMATERNO.Contains(clienteCLS.fullName))
+                                    (clienteCLS.searchName.Contains(cliente.NOMBRE) ||
+                                     clienteCLS.searchName.Contains(cliente.APPATERNO) ||
+                                     clienteCLS.searchName.Contains(cliente.APMATERNO) ||
+                                     cliente.NOMBRE.Contains(clienteCLS.searchName) ||
+                                     cliente.APPATERNO.Contains(clienteCLS.searchName) ||
+                                     cliente.APMATERNO.Contains(clienteCLS.searchName))
                                     select new ClienteCLS {
                                         iidcliente = cliente.IIDCLIENTE,
                                         nombre = cliente.NOMBRE,
