@@ -20,32 +20,32 @@
             <input type="submit" class="btn btn-default" value="Buscar" />
         </div>
     </div>
-    <br />
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <td width="10%">@Html.LabelFor(p => Model[0].iidmarca)</td>
-                <td width="20%">@Html.LabelFor(p => Model[0].nombre)</td>
-                <td width="60%">@Html.LabelFor(p => Model[0].descripcion)</td>
-                <td width="10%"><label>Operaciones</label></td>
-            </tr>
-        </thead>
-        <tbody>
-            @* El foreach recorre las columnas de model List<MarcaCLS> *@
-            @foreach(var m in Model) {
-                <tr>
-                    <td>@m.iidmarca</td>
-                    <td>@m.nombre</td>
-                    <td>@m.descripcion</td>
-                    <td>
-                        @Html.ActionLink(" ", "EditarMarca", "Marca", new { id = @m.iidmarca }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
-                        <button type="button" class="glyphicon glyphicon-trash btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="itemToDelete(@m.iidmarca)">  </button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 }
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td width="10%">@Html.LabelFor(p => Model[0].iidmarca)</td>
+            <td width="20%">@Html.LabelFor(p => Model[0].nombre)</td>
+            <td width="60%">@Html.LabelFor(p => Model[0].descripcion)</td>
+            <td width="10%"><label>Operaciones</label></td>
+        </tr>
+    </thead>
+    <tbody>
+        @* El foreach recorre las columnas de model List<MarcaCLS> *@
+        @foreach(var m in Model) {
+            <tr>
+                <td>@m.iidmarca</td>
+                <td>@m.nombre</td>
+                <td>@m.descripcion</td>
+                <td>
+                    @Html.ActionLink(" ", "EditarMarca", "Marca", new { id = @m.iidmarca }, new { @class = "glyphicon glyphicon-edit btn btn-primary" })
+                    <button type="button" class="glyphicon glyphicon-trash btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="itemToDelete(@m.iidmarca)">  </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @using(Html.BeginForm("BorrarMarca", "Marca", FormMethod.Post, new { @id = "deleteForm" })) {
     @Html.Hidden("idMarca")
