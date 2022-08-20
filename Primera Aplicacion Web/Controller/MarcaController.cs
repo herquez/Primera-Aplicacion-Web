@@ -15,7 +15,6 @@ namespace Primera_Aplicacion_Web.Controllers
             //  "using" abre y cierra la conexion. Importante agregar el modelo en la cabecera.
             List<MarcaCLS> listaMarca = new List<MarcaCLS>();
 
-            System.Diagnostics.Debug.WriteLine("master");
             using(var bd = new BDPasajeEntities()) {
                 if(marcaCLS.nombre == null) {
                     listaMarca = (from marca in bd.Marca
