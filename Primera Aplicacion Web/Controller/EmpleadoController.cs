@@ -11,25 +11,49 @@ namespace Primera_Aplicacion_Web.Controllers
     public class EmpleadoController : Controller
     {
         // GET: Empleado
-        public ActionResult Index()
+        public ActionResult Index(EmpleadoCLS empleadoCLS)
         {
             List<EmpleadoCLS> listaEmpleado = new List<EmpleadoCLS>();
             using(var bd = new BDPasajeEntities()) {
-                listaEmpleado = (from empleado in bd.Empleado
-                                 join tipousuario in bd.TipoUsuario
-                                 on empleado.IIDTIPOUSUARIO equals tipousuario.IIDTIPOUSUARIO
-                                 join tipocontrato in bd.TipoContrato
-                                 on empleado.IIDTIPOCONTRATO equals tipocontrato.IIDTIPOCONTRATO
-                                 where empleado.BHABILITADO == 1
-                                 select new EmpleadoCLS {
-                                     iidempleado = empleado.IIDEMPLEADO,
-                                     nombre = empleado.NOMBRE,
-                                     appaterno = empleado.APPATERNO,
-                                     apmaterno = empleado.APMATERNO,
-                                     nombretipousuario = tipousuario.NOMBRE,
-                                     nombretipocontrato = tipocontrato.NOMBRE,
-                                     sueldo = (decimal)empleado.SUELDO
-                                 }).ToList();
+                if(empleadoCLS.searchName == null) {
+                    listaEmpleado = (from empleado in bd.Empleado
+                                     join tipousuario in bd.TipoUsuario
+                                     on empleado.IIDTIPOUSUARIO equals tipousuario.IIDTIPOUSUARIO
+                                     join tipocontrato in bd.TipoContrato
+                                     on empleado.IIDTIPOCONTRATO equals tipocontrato.IIDTIPOCONTRATO
+                                     where empleado.BHABILITADO == 1
+                                     select new EmpleadoCLS {
+                                         iidempleado = empleado.IIDEMPLEADO,
+                                         nombre = empleado.NOMBRE,
+                                         appaterno = empleado.APPATERNO,
+                                         apmaterno = empleado.APMATERNO,
+                                         nombretipousuario = tipousuario.NOMBRE,
+                                         nombretipocontrato = tipocontrato.NOMBRE,
+                                         sueldo = (decimal)empleado.SUELDO
+                                     }).ToList();
+                } else {
+                    listaEmpleado = (from empleado in bd.Empleado
+                                     join tipousuario in bd.TipoUsuario
+                                     on empleado.IIDTIPOUSUARIO equals tipousuario.IIDTIPOUSUARIO
+                                     join tipocontrato in bd.TipoContrato
+                                     on empleado.IIDTIPOCONTRATO equals tipocontrato.IIDTIPOCONTRATO
+                                     where empleado.BHABILITADO == 1 &&
+                                     (empleadoCLS.searchName.Contains(empleado.NOMBRE) ||
+                                     empleadoCLS.searchName.Contains(empleado.APPATERNO) ||
+                                     empleadoCLS.searchName.Contains(empleado.APMATERNO) ||
+                                     empleado.NOMBRE.Contains(empleadoCLS.searchName) ||
+                                     empleado.APPATERNO.Contains(empleadoCLS.searchName) ||
+                                     empleado.APMATERNO.Contains(empleadoCLS.searchName))
+                                     select new EmpleadoCLS {
+                                         iidempleado = empleado.IIDEMPLEADO,
+                                         nombre = empleado.NOMBRE,
+                                         appaterno = empleado.APPATERNO,
+                                         apmaterno = empleado.APMATERNO,
+                                         nombretipousuario = tipousuario.NOMBRE,
+                                         nombretipocontrato = tipocontrato.NOMBRE,
+                                         sueldo = (decimal)empleado.SUELDO
+                                     }).ToList();
+                }
             }
             return View(listaEmpleado);
         }

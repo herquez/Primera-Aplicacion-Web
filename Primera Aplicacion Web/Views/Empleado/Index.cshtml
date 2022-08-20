@@ -10,6 +10,18 @@
 
 <br />
 <br />
+@using(Html.BeginForm("Index", "Empleado", FormMethod.Post)) {
+    <div class="row">
+        <div class="col-md-3">
+            <input type="text" class="form-control" id="searchName" name="searchName" placeholder="Ingrese nombre del empleado" />
+        </div>
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-default" value="Buscar"/>
+        </div>
+    </div>
+}
+
+<br />
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -39,7 +51,8 @@
     </tbody>
 </table>
 
-@using(Html.BeginForm("borrarEmpleado", "Empleado", FormMethod.Post, new { @id = "deleteForm" })) {
+@using(Html.BeginForm("borrarEmpleado", "Empleado", FormMethod.Post, new { @id = "deleteForm"
+})) {
     @Html.Hidden("idEmpleado")
 }
 
