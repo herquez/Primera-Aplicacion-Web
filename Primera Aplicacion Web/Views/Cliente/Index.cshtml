@@ -10,13 +10,13 @@
 <br />
 <br />
 
-@using(Html.BeginForm("Index", "Cliente", FormMethod.Post)) {
+@using(Html.BeginForm("Index", "Cliente", FormMethod.Post, new {id= "searchForm" })) {
     <div class="row">
         <div class="col-md-3">
-            <input id="searchName" name="searchName" class="form-control" type="text" placeholder="Ingrese nombre de cliente" />
+            @Html.TextBox("searchName", null, new { placeholder = "Ingrese nombre de cliente", @class = "form-control" })
         </div>
         <div class="col-md-3">
-            <input type="submit" class="btn btn-default" value="Buscar" />
+            @*Combobox de busqueda*@
         </div>
     </div>
 }
@@ -69,12 +69,4 @@
     </div>
 </div>
 
-<script>
-    function itemToDelete(idCliente) {
-        document.getElementById("idCliente").value = idCliente;
-    }
-
-    function borrar() {
-        document.getElementById("deleteForm").submit();
-    }
-</script>
+<script type="text/javascript" src="~/Scripts/Cliente.js"></script>

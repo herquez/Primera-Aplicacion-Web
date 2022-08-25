@@ -14,7 +14,7 @@
 @using(Html.BeginForm("Index", "Marca", FormMethod.Get, new {@id = "searchForm"})) {
     <div class="row">
         <div class="col-md-3">
-            @Html.TextBox("nombre", null, new { @placeholder = "Ingrese marca", @class = "form-control" })
+            @Html.TextBox("nombre", null, new { placeholder = "Ingrese marca", @class = "form-control" })
         </div>
     </div>
 }
