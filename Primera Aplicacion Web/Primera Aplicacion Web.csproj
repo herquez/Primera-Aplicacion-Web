@@ -112,6 +112,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\Cliente.js" />
+    <Content Include="Scripts\Sucursal.js" />
     <Content Include="Scripts\services\bootstrap.js" />
     <Content Include="Scripts\services\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
