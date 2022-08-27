@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Clientes";
+    List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.listaSexo;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,8 +16,8 @@
         <div class="col-md-3">
             @Html.TextBox("searchName", null, new { placeholder = "Ingrese nombre de cliente", @class = "form-control" })
         </div>
-        <div class="col-md-3">
-            @*Combobox de busqueda*@
+        <div class="col-md-2">
+            @Html.DropDownList("iidsexo", listaSexo, "Seleccione Sexo...", new { @class = "form-control" })
         </div>
     </div>
 }

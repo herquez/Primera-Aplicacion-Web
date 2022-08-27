@@ -15,7 +15,7 @@ namespace Primera_Aplicacion_Web.Controllers
         {
             List<ClienteCLS> listaCliente = new List<ClienteCLS>();
             using(var db = new BDPasajeEntities()) {
-                if(clienteCLS.searchName == null) {
+                if(clienteCLS.searchName == null && clienteCLS.iidsexo == 0) {
                     listaCliente = (from cliente in db.Cliente
                                     where cliente.BHABILITADO == 1
                                     select new ClienteCLS {
@@ -25,7 +25,7 @@ namespace Primera_Aplicacion_Web.Controllers
                                         apmaterno = cliente.APMATERNO,
                                         telefonofijo = cliente.TELEFONOFIJO,
                                     }).ToList();
-                } else {
+                } else if(clienteCLS.iidsexo == 0) {
                     listaCliente = (from cliente in db.Cliente
                                     where cliente.BHABILITADO == 1 &&
                                     (clienteCLS.searchName.Contains(cliente.NOMBRE) ||
@@ -41,8 +41,37 @@ namespace Primera_Aplicacion_Web.Controllers
                                         apmaterno = cliente.APMATERNO,
                                         telefonofijo = cliente.TELEFONOFIJO,
                                     }).ToList();
+                } else if(clienteCLS.searchName == null) {
+                    listaCliente = (from cliente in db.Cliente
+                                    where cliente.BHABILITADO == 1 &&
+                                    clienteCLS.iidsexo == cliente.IIDSEXO
+                                    select new ClienteCLS {
+                                        iidcliente = cliente.IIDCLIENTE,
+                                        nombre = cliente.NOMBRE,
+                                        appaterno = cliente.APPATERNO,
+                                        apmaterno = cliente.APMATERNO,
+                                        telefonofijo = cliente.TELEFONOFIJO,
+                                    }).ToList();
+                } else {
+                    listaCliente = (from cliente in db.Cliente
+                                    where cliente.BHABILITADO == 1 &&
+                                    clienteCLS.iidsexo == cliente.IIDSEXO &&
+                                    (clienteCLS.searchName.Contains(cliente.NOMBRE) ||
+                                     clienteCLS.searchName.Contains(cliente.APPATERNO) ||
+                                     clienteCLS.searchName.Contains(cliente.APMATERNO) ||
+                                     cliente.NOMBRE.Contains(clienteCLS.searchName) ||
+                                     cliente.APPATERNO.Contains(clienteCLS.searchName) ||
+                                     cliente.APMATERNO.Contains(clienteCLS.searchName))
+                                    select new ClienteCLS {
+                                        iidcliente = cliente.IIDCLIENTE,
+                                        nombre = cliente.NOMBRE,
+                                        appaterno = cliente.APPATERNO,
+                                        apmaterno = cliente.APMATERNO,
+                                        telefonofijo = cliente.TELEFONOFIJO,
+                                    }).ToList();
                 }
             }
+            sexoDropDown();
             return View(listaCliente);
         }
 
