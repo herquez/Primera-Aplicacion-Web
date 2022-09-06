@@ -10,28 +10,50 @@ namespace Primera_Aplicacion_Web.Controllers
     public class BusController : Controller
     {
         // GET: Bus
-        public ActionResult Index()
+        public ActionResult Index(BusCLS busCLS)
         {
             List<BusCLS> listaBus = new List<BusCLS>();
             using(var bd = new BDPasajeEntities()) {
-                listaBus = (from bus in bd.Bus
-                            join sucursal in bd.Sucursal
-                            on bus.IIDSUCURSAL equals sucursal.IIDSUCURSAL
-                            join tipobus in bd.TipoBus
-                            on bus.IIDTIPOBUS equals tipobus.IIDTIPOBUS
-                            join modelo in bd.Modelo
-                            on bus.IIDMODELO equals modelo.IIDMODELO
-                            join marca in bd.Marca
-                            on bus.IIDMARCA equals marca.IIDMARCA
-                            where bus.BHABILITADO == 1
-                            select new BusCLS {
-                               iidbus = bus.IIDBUS,
-                               placa = bus.PLACA,
-                               nombresucursal = sucursal.NOMBRE,
-                               nombretipobus = tipobus.NOMBRE,
-                               nombremodelo = modelo.NOMBRE,
-                               nombremarca = marca.NOMBRE
-                           }).ToList();
+                if(busCLS.placa == null) {
+                    listaBus = (from bus in bd.Bus
+                                join sucursal in bd.Sucursal
+                                on bus.IIDSUCURSAL equals sucursal.IIDSUCURSAL
+                                join tipobus in bd.TipoBus
+                                on bus.IIDTIPOBUS equals tipobus.IIDTIPOBUS
+                                join modelo in bd.Modelo
+                                on bus.IIDMODELO equals modelo.IIDMODELO
+                                join marca in bd.Marca
+                                on bus.IIDMARCA equals marca.IIDMARCA
+                                where bus.BHABILITADO == 1
+                                select new BusCLS {
+                                    iidbus = bus.IIDBUS,
+                                    placa = bus.PLACA,
+                                    nombresucursal = sucursal.NOMBRE,
+                                    nombretipobus = tipobus.NOMBRE,
+                                    nombremodelo = modelo.NOMBRE,
+                                    nombremarca = marca.NOMBRE
+                                }).ToList();
+                } else {
+                    listaBus = (from bus in bd.Bus
+                                join sucursal in bd.Sucursal
+                                on bus.IIDSUCURSAL equals sucursal.IIDSUCURSAL
+                                join tipobus in bd.TipoBus
+                                on bus.IIDTIPOBUS equals tipobus.IIDTIPOBUS
+                                join modelo in bd.Modelo
+                                on bus.IIDMODELO equals modelo.IIDMODELO
+                                join marca in bd.Marca
+                                on bus.IIDMARCA equals marca.IIDMARCA
+                                where bus.BHABILITADO == 1 &&
+                                bus.PLACA.Contains(busCLS.placa)
+                                select new BusCLS {
+                                    iidbus = bus.IIDBUS,
+                                    placa = bus.PLACA,
+                                    nombresucursal = sucursal.NOMBRE,
+                                    nombretipobus = tipobus.NOMBRE,
+                                    nombremodelo = modelo.NOMBRE,
+                                    nombremarca = marca.NOMBRE
+                                }).ToList();
+                }
             }
             return View(listaBus);
         }

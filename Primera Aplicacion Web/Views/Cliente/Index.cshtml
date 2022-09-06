@@ -2,12 +2,25 @@
 
 @{
     ViewBag.Title = "Clientes";
+    List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.listaSexo;
 }
 
 <h2>@ViewBag.Title</h2>
 
 @Html.ActionLink("Agregar Cliente", "AgregarCliente", "Cliente", null, new { @class = "btn btn-primary" })
 <br />
+<br />
+
+@using(Html.BeginForm("Index", "Cliente", FormMethod.Post, new {id= "searchForm" })) {
+    <div class="row">
+        <div class="col-md-3">
+            @Html.TextBox("searchName", null, new { placeholder = "Ingrese nombre de cliente", @class = "form-control" })
+        </div>
+        <div class="col-md-2">
+            @Html.DropDownList("iidsexo", listaSexo, "Seleccione Sexo...", new { @class = "form-control" })
+        </div>
+    </div>
+}
 <br />
 <table class="table table-bordered table-hover">
     <thead>
@@ -37,6 +50,7 @@
     @Html.Hidden("idCliente")
 }
 
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -56,12 +70,4 @@
     </div>
 </div>
 
-<script>
-    function itemToDelete(idCliente) {
-        document.getElementById("idCliente").value = idCliente;
-    }
-
-    function borrar() {
-        document.getElementById("deleteForm").submit();
-    }
-</script>
+<script type="text/javascript" src="~/Scripts/javascripts/Cliente.js"></script>

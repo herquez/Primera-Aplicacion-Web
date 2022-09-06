@@ -10,19 +10,30 @@ namespace Primera_Aplicacion_Web.Controllers
     public class MarcaController : Controller
     {
         // GET: Marca
-        public ActionResult Index()
+        public ActionResult Index(MarcaCLS marcaCLS)
         {
             //  "using" abre y cierra la conexion. Importante agregar el modelo en la cabecera.
             List<MarcaCLS> listaMarca = new List<MarcaCLS>();
-            using (var bd = new BDPasajeEntities()) {
-                listaMarca = (from marca in bd.Marca
-                             where marca.BHABILITADO == 1
-                             select new MarcaCLS
-                             {
-                                iidmarca = marca.IIDMARCA,
-                                nombre = marca.NOMBRE,
-                                descripcion = marca.DESCRIPCION,
-                             }).ToList();
+
+            using(var bd = new BDPasajeEntities()) {
+                if(marcaCLS.nombre == null) {
+                    listaMarca = (from marca in bd.Marca
+                              where marca.BHABILITADO == 1
+                              select new MarcaCLS {
+                                  iidmarca = marca.IIDMARCA,
+                                  nombre = marca.NOMBRE,
+                                  descripcion = marca.DESCRIPCION,
+                              }).ToList();
+                } else {
+                    listaMarca = (from marca in bd.Marca
+                                  where marca.BHABILITADO == 1 &&
+                                  marca.NOMBRE.Contains(marcaCLS.nombre)
+                                  select new MarcaCLS {
+                                      iidmarca = marca.IIDMARCA,
+                                      nombre = marca.NOMBRE,
+                                      descripcion = marca.DESCRIPCION,
+                                  }).ToList();
+                }
             }
             return View(listaMarca);
         }

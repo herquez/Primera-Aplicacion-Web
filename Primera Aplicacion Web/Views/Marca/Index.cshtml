@@ -11,6 +11,14 @@
 
 <br />
 <br />
+@using(Html.BeginForm("Index", "Marca", FormMethod.Get, new {@id = "searchForm"})) {
+    <div class="row">
+        <div class="col-md-3">
+            @Html.TextBox("nombre", null, new { placeholder = "Ingrese marca", @class = "form-control" })
+        </div>
+    </div>
+}
+<br />
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -59,12 +67,4 @@
     </div>
 </div>
 
-<script>
-    function itemToDelete(idMarca) {
-        document.getElementById("idMarca").value = idMarca;
-    }
-
-    function borrar() {
-        document.getElementById("deleteForm").submit();
-    }
-</script>
+<script type="text/javascript" src="~/Scripts/javascripts/Marca.js"></script>
