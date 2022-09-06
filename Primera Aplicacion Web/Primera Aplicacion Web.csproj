@@ -111,15 +111,16 @@
       <DependentUpon>BDPasajes.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\Cliente.js" />
-    <Content Include="Scripts\Sucursal.js" />
-    <Content Include="Scripts\services\bootstrap.js" />
-    <Content Include="Scripts\services\bootstrap.min.js" />
+    <Content Include="Scripts\javascripts\Cliente.js" />
+    <Content Include="Scripts\javascripts\Marca.js" />
+    <Content Include="Scripts\javascripts\Sucursal.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\services\index.js.flow" />
+    <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
@@ -132,17 +133,16 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\services\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\services\jquery-3.4.1.js" />
-    <Content Include="Scripts\services\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\services\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\services\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\Marca.js" />
-    <Content Include="Scripts\services\modernizr-2.8.3.js" />
-    <Content Include="Scripts\services\popper-utils.js" />
-    <Content Include="Scripts\services\popper-utils.min.js" />
-    <Content Include="Scripts\services\popper.js" />
-    <Content Include="Scripts\services\popper.min.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -219,6 +219,7 @@
     <Compile Include="Controller\EmpleadoController.cs" />
     <Compile Include="Controller\MarcaController.cs" />
     <Compile Include="Controller\SucursalController.cs" />
+    <Compile Include="Controller\UserTypeController.cs" />
     <Compile Include="Controller\ViajeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -297,6 +298,7 @@
     <Compile Include="Models\TIPOUSUARIOREGISTRO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserTypeCLS.cs" />
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -344,13 +346,14 @@
     <Content Include="Scripts\umd\popper.js.flow" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\services\README.md" />
-    <Content Include="Scripts\services\popper.min.js.map" />
-    <Content Include="Scripts\services\popper.js.map" />
-    <Content Include="Scripts\services\popper-utils.min.js.map" />
-    <Content Include="Scripts\services\popper-utils.js.map" />
-    <Content Include="Scripts\services\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\services\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\UserType\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -366,7 +369,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\services\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
