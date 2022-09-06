@@ -24,6 +24,7 @@ namespace Primera_Aplicacion_Web.Controllers
                                   nombre = marca.NOMBRE,
                                   descripcion = marca.DESCRIPCION,
                               }).ToList();
+                    ViewBag.focus = false;
                 } else {
                     listaMarca = (from marca in bd.Marca
                                   where marca.BHABILITADO == 1 &&
@@ -33,7 +34,9 @@ namespace Primera_Aplicacion_Web.Controllers
                                       nombre = marca.NOMBRE,
                                       descripcion = marca.DESCRIPCION,
                                   }).ToList();
+                    ViewBag.focus = true;
                 }
+                
             }
             return View(listaMarca);
         }
