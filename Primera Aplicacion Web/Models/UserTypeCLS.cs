@@ -15,12 +15,12 @@ namespace Primera_Aplicacion_Web.Models {
         [StringLength(150, ErrorMessage = "La longitud máxima son 150 caracteres.")]
         public string nombre { get; set; }
 
-        public int bhabilitado { get; set; }
-
         [Required]
         [Display(Name = "Descripción Tipo de Usuario")]
-        [StringLength(200, ErrorMessage = "La longitud máxima son 200 caracteres.")]
+        [StringLength(250, ErrorMessage = "La longitud máxima son 200 caracteres.")]
         public string descripcion { get; set; }
+
+        public int bhabilitado { get; set; }
 
         //Aditional propeties
         public string errorMessage { get; set; }
