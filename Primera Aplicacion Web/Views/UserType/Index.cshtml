@@ -20,6 +20,15 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            @using (Html.BeginForm("Index", "UserType", FormMethod.Post, new { @id = "search_form" }))
+            {
+                <td>@Html.TextBox("iidtipousuario", null, new { @class = "form-control" })</td>
+                <td>@Html.TextBox("nombre", null, new { @class = "form-control" })</td>
+                <td>@Html.TextBox("descripcion", null, new { @class = "form-control" })</td>
+                <td></td>
+            }
+            </tr>
         @foreach(var m in Model) {
             <tr>
                 <td>@m.iidtipousuario</td>
