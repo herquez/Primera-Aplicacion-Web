@@ -112,6 +112,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\javascripts\Cliente.js" />
+    <Content Include="Scripts\javascripts\UserType.js" />
     <Content Include="Scripts\javascripts\Marca.js" />
     <Content Include="Scripts\javascripts\Sucursal.js" />
     <Content Include="Scripts\bootstrap.js" />
