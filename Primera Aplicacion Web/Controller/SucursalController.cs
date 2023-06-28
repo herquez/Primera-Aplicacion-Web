@@ -10,18 +10,30 @@ namespace Primera_Aplicacion_Web.Controllers
     public class SucursalController : Controller
     {
         // GET: Sucursal
-        public ActionResult Index()
+        public ActionResult Index(SucursalCLS sucursalCLS)
         {
             List<SucursalCLS> listaSucursal = new List<SucursalCLS>();
             using(var bd = new BDPasajeEntities()) {
-                listaSucursal = (from sucursal in bd.Sucursal
-                                 where sucursal.BHABILITADO == 1
-                                 select new SucursalCLS {
-                                     iidsucursal = sucursal.IIDSUCURSAL,
-                                     nombre = sucursal.NOMBRE,
-                                     telefono = sucursal.TELEFONO,
-                                     email = sucursal.EMAIL,
-                                 }).ToList();
+                if(sucursalCLS.nombre == null) {
+                    listaSucursal = (from sucursal in bd.Sucursal
+                                     where sucursal.BHABILITADO == 1
+                                     select new SucursalCLS {
+                                         iidsucursal = sucursal.IIDSUCURSAL,
+                                         nombre = sucursal.NOMBRE,
+                                         telefono = sucursal.TELEFONO,
+                                         email = sucursal.EMAIL,
+                                     }).ToList();
+                } else {
+                    listaSucursal = (from sucursal in bd.Sucursal
+                                     where sucursal.BHABILITADO == 1 &&
+                                     sucursal.NOMBRE.Contains(sucursalCLS.nombre)
+                                     select new SucursalCLS {
+                                         iidsucursal = sucursal.IIDSUCURSAL,
+                                         nombre = sucursal.NOMBRE,
+                                         telefono = sucursal.TELEFONO,
+                                         email = sucursal.EMAIL,
+                                     }).ToList();
+                }
             }
             return View(listaSucursal);
         }

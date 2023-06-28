@@ -1,4 +1,5 @@
 ﻿@model List<Primera_Aplicacion_Web.Models.SucursalCLS>
+
 @{
     ViewBag.Title = "Sucursales";
 }
@@ -8,6 +9,14 @@
 @Html.ActionLink("Agregar Sucursal", "AgregarSucursal", "Sucursal", null, new { @class = "btn btn-primary" })
 
 <br />
+<br />
+@using(Html.BeginForm("Index", "Sucursal", FormMethod.Post, new {id="searchForm"})) {
+    <div class="row">
+        <div class="col-md-3">
+            @Html.TextBox("nombre", null, new {placeholder = "Ingrese sucursal", @class = "form-control" })    
+        </div>
+    </div>
+}
 <br />
 <table class="table table-bordered table-hover">
     <thead>
@@ -58,12 +67,4 @@
     </div>
 </div>
 
-<script>
-    function itemToDelete(idSucursal) {
-        document.getElementById("idSucursal").value = idSucursal;
-    }
-
-    function borrar() {
-        document.getElementById("deleteForm").submit();
-    }
-</script>
+<script type="text/javascript" src="~/Scripts/javascripts/Sucursal.js"></script>

@@ -24,6 +24,8 @@ namespace Primera_Aplicacion_Web.Models {
         [StringLength(200, ErrorMessage = "La longitud máxima son 200 caracteres.")]
         public string apmaterno { get; set; }
 
+        public string searchName { get; set; }
+
         [Required]
         [Display(Name = "Fecha de contrato")]
         [DataType(DataType.Date)]

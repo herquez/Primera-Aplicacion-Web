@@ -111,6 +111,10 @@
       <DependentUpon>BDPasajes.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\javascripts\Cliente.js" />
+    <Content Include="Scripts\javascripts\UserType.js" />
+    <Content Include="Scripts\javascripts\Marca.js" />
+    <Content Include="Scripts\javascripts\Sucursal.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -216,6 +220,7 @@
     <Compile Include="Controller\EmpleadoController.cs" />
     <Compile Include="Controller\MarcaController.cs" />
     <Compile Include="Controller\SucursalController.cs" />
+    <Compile Include="Controller\UserTypeController.cs" />
     <Compile Include="Controller\ViajeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,6 +299,7 @@
     <Compile Include="Models\TIPOUSUARIOREGISTRO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserTypeCLS.cs" />
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -348,7 +354,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <Content Include="Views\Marca\BorrarMarca.cshtml" />
+    <Content Include="Views\UserType\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
