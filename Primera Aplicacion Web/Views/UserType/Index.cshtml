@@ -23,7 +23,8 @@
         <tr>
             @using (Html.BeginForm("Index", "UserType", FormMethod.Post, new { @id = "search_form" }))
             {
-                <td>@Html.TextBox("iidtipousuario", null, new { @class = "form-control" })</td>
+                <td>@Html.TextBox("iidtipousuario", null,
+new { @class = "form-control" })</td>
                 <td>@Html.TextBox("nombre", null, new { @class = "form-control" })</td>
                 <td>@Html.TextBox("descripcion", null, new { @class = "form-control" })</td>
                 <td></td>
@@ -66,4 +67,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src="~/Scripts/UserType.js"></script>
+<script type="text/javascript" src="~/Scripts/javascripts/UserType.js"></script>
